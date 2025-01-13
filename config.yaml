@@ -1,4 +1,4 @@
 database:
-  mongo_uri: "mongodb://user:password@localhost:27017"
-  mongo_db_name: "my_mongo_db"
-  postgres_uri: "postgresql://user:password@localhost:5432/my_postgres_db"
+  mongo_uri: #"mongodb://user:password@localhost:27017"
+  mongo_db_name: #"my_mongo_db"
+  postgres_uri: #"postgresql://user:password@localhost:5432/my_postgres_db"
