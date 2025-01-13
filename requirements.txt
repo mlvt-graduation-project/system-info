@@ -1,0 +1,6 @@
+# requirements.txt
+
+# Third-party dependencies
+pymongo==4.5.0
+psycopg2-binary==2.9.6
+PyYAML==6.0
