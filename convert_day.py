@@ -4,7 +4,7 @@ def isLeapYear(year: int) -> bool:
     """Check if a year is a leap year."""
     return (year % 4 == 0) and ((year % 100 != 0) or (year % 400 == 0))
 
-def ConvertDayToTimestamp(day, month, year):
+def ConvertDayToTimestamp(day: int, month: int, year: int) -> tuple[int, str]:
     """
     Convert a given day (e.g., 01/01/2025) with defaul time 00:00:00 
     into a Unix timestamp (e.g., 1735743797).
@@ -12,8 +12,6 @@ def ConvertDayToTimestamp(day, month, year):
     Output: timestamp (in seconds), error message (if any).
     """
 
-    if not(isinstance(year, int) and isinstance(month, int) and isinstance(day, int)):
-        return 0, "Invalid input: Input year, month and day must be intergers."
     if year <= 1970:
         return 0, "Invalid input: The year must be 1971 or later."
     if (month < 1) or (month > 12):
@@ -38,7 +36,7 @@ def ConvertDayToTimestamp(day, month, year):
 
     return unixTimestamp, err
 
-def GetMonthRange(month, year):
+def GetMonthRange(month: int, year: int) -> tuple[int, int, str]:
     """
     Calculate the Unix timestamp range for a given month of a year.
     Input: month, year (integers).
@@ -47,8 +45,6 @@ def GetMonthRange(month, year):
         endOfMonth (int): Unix timestamp for the end of the month (23:59:59 on the last day).
         err (str or None): An error message if input is invalid, or None if no errors.
     """
-    if not(isinstance(year, int) and isinstance(month, int)):
-        return 0, 0, "Invalid input: Input year and month must be intergers."
 
     # Calculate the start of the month
     startOfMonth, err1 = ConvertDayToTimestamp(1, month, year)
@@ -66,7 +62,7 @@ def GetMonthRange(month, year):
 
     return startOfMonth, endOfMonth, err
 
-def GetYearRange(year):
+def GetYearRange(year: int) -> tuple[int, int, str]:
     """
     Calculate the Unix timestamp range for a given year.
     Input: year (integers).
@@ -75,8 +71,6 @@ def GetYearRange(year):
         endOfYear (int): Unix timestamp for the end of the month (23:59:59 on 31/12/year).
         err (str or None): An error message if input is invalid, or None if no errors.
     """
-    if not(isinstance(year, int)):
-        return 0, 0, "Invalid input: Input year must be interger."
 
     # Calculate the start of the year
     startOfYear, err1 = ConvertDayToTimestamp(1, 1, year)
