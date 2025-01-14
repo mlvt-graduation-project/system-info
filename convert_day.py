@@ -1,6 +1,6 @@
 from datetime import datetime
 
-def IsLeapYear(year):
+def isLeapYear(year: int) -> bool:
     """Check if a year is a leap year."""
     return (year % 4 == 0) and ((year % 100 != 0) or (year % 400 == 0))
 
@@ -26,7 +26,7 @@ def ConvertDayToTimestamp(day, month, year):
     if (month in {4, 6, 9, 11}) and (day > 30):
         return 0, f"Invalid input: The month {month} only has 30 days."
     
-    if IsLeapYear(year):
+    if isLeapYear(year):
         if (month == 2) and (day > 29):
             return 0, f"Invalid input: February {year} (Leap year) only has 29 days."
     elif (month == 2) and (day > 28):
