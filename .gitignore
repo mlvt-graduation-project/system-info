@@ -1,5 +1,8 @@
 config.yaml
 
+# Deployments
+deployment.sh
+
 # Logs directory
 logs/
 
