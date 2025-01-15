@@ -7,7 +7,7 @@ router = APIRouter()
 logger = GetLogger()
 
 @router.post("/timestamp", response_model=TimestampResponse)
-def get_timestamp(body: DayMonthYearRequest) -> TimestampResponse:
+def GetTimestamp(body: DayMonthYearRequest) -> TimestampResponse:
     """
     Return the unix timestamp for given day, month, year.
 
@@ -18,7 +18,6 @@ def get_timestamp(body: DayMonthYearRequest) -> TimestampResponse:
           "year": 2025
         }
     """
-    logger.info(f"Received request: day={DayMonthYearRequest.day}, month={DayMonthYearRequest.month}, year={DayMonthYearRequest.year}")
     timestamp, err = ConvertDayToTimestamp(body.day, body.month, body.year)
     if err:
         logger.error(f"Error converting date: {err}")
