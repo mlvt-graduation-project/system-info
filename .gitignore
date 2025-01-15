@@ -1,3 +1,5 @@
+config.yaml
+
 # Virtual environment directories
 venv/
 .venv/
