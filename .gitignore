@@ -1,5 +1,8 @@
 config.yaml
 
+# Logs directory
+logs/
+
 # Virtual environment directories
 venv/
 .venv/
