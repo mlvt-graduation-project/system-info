@@ -1,27 +1,17 @@
 from fastapi import FastAPI
-from starlette.middleware.cors import CORSMiddleware
+import uvicorn
 
-from app.routers import my_router
+# IMPORTANT: Must reference `routers` (plural), 
+# since your folder is now named `routers`
+from .routers.day2timestamp import router as day2timestamp_router
 
-app = FastAPI(title="My FastAPI App")
+app = FastAPI()
 
-# Optional: Set up CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+app.include_router(day2timestamp_router, prefix="/day2timestamp", tags=["Day2Timestamp"])
 
-# Include router
-app.include_router(my_router.router, prefix="/api", tags=["API"])
+@app.get("/")
+def read_root():
+    return {"message": "Hello World!"}
 
-@app.on_event("startup")
-def on_startup():
-    # Optional startup tasks: database migrations, etc.
-    pass
-
-@app.on_event("shutdown")
-def on_shutdown():
-    # Optional cleanup tasks
-    pass
+if __name__ == "__main__":
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
