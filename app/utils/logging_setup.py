@@ -38,6 +38,6 @@ logger.addHandler(error_handler)
 # console_handler.setFormatter(formatter)
 # logger.addHandler(console_handler)
 
-def get_logger():
+def GetLogger():
     """Return the custom system logger."""
     return logger

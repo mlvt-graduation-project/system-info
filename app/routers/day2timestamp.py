@@ -1,10 +1,10 @@
 from fastapi import APIRouter
 from .schemas import DayMonthYearRequest, TimestampResponse
 from ..utils.convert_day import ConvertDayToTimestamp
-from ..utils.logging_setup import get_logger
+from ..utils.logging_setup import GetLogger
 
 router = APIRouter()
-logger = get_logger()
+logger = GetLogger()
 
 @router.post("/timestamp", response_model=TimestampResponse)
 def get_timestamp(body: DayMonthYearRequest) -> TimestampResponse:

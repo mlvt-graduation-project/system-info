@@ -3,9 +3,9 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 import uvicorn
 from .routers.day2timestamp import router as day2timestamp_router
-from .utils.logging_setup import get_logger
+from .utils.logging_setup import GetLogger
 
-logger = get_logger()
+logger = GetLogger()
 
 app = FastAPI()
 
