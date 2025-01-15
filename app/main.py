@@ -1,17 +1,32 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 import uvicorn
-
-# IMPORTANT: Must reference `routers` (plural), 
-# since your folder is now named `routers`
 from .routers.day2timestamp import router as day2timestamp_router
+from .utils.logging_setup import get_logger
+
+logger = get_logger()
 
 app = FastAPI()
 
 app.include_router(day2timestamp_router, prefix="/day2timestamp", tags=["Day2Timestamp"])
 
-@app.get("/")
-def read_root():
-    return {"message": "Hello World!"}
+# Custom handler for validation errors
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    logger.error(f"Validation error: {exc.errors()} | Body: {await request.body()}")
+    return JSONResponse(
+        status_code=422,
+        content={"detail": exc.errors(), "body": exc.body if hasattr(exc, 'body') else None},
+    )
+
+@app.on_event("startup")
+async def startup_event():
+    logger.info("Application startup")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    logger.info("Application shutdown")
 
 if __name__ == "__main__":
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
