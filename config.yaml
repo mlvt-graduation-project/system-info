@@ -1,7 +1,8 @@
-MONGO_URI: 'mongodb://localhost:27017'
-MONGO_DB: 'mlvt'
+database:
+    MONGO_URI: 'mongodb://localhost:27017'
+    MONGO_DB: 'mlvt'
 
-POSTGRES_HOST: 'localhost'
-POSTGRES_DB: 'mlvt'
-POSTGRES_USER: ''
-POSTGRES_PASSWORD: ''
+    POSTGRES_HOST: 'localhost'
+    POSTGRES_DB: 'mlvt'
+    POSTGRES_USER: ''
+    POSTGRES_PASSWORD: ''

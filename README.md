@@ -1,35 +1,73 @@
-# system-info
+# Importance Note
 
-## Overview
+Please spend time reading these documents first before going deeper:
 
-This project provides a system for managing and interacting with MongoDB and PostgreSQL databases. It includes scripts for database migrations, connections, and basic CRUD operations.
+-   [How to use venv](venv_usage_guide.md)
 
-## File Descriptions
+---
 
--   **`MongoDB_connect.py`**: Contains functions to connect to a MongoDB database and perform CRUD operations on collections.
+# Structure Explanation
 
--   **`Postgres/Postgres_connect.py`**: Provides functions to connect to a PostgreSQL database and execute SQL queries, including SELECT, INSERT, UPDATE, DELETE, and transaction management.
+```bash
+.
+├── app
+│   ├── databases
+│   ├── models
+│   ├── routers
+│   ├── services
+│   └── utils
+└── venv
+```
 
--   **`Postgres/init_postgres.sql`**: SQL script to initialize the PostgreSQL database with necessary tables if they do not exist.
+-   `app`: The main application folder.
+    -   `databases`: Contains connections and methods to interact with the database.
+    -   `models`: Defines the data structure.
+    -   `routers`: Handles API endpoints.
+    -   `services`: Implements business logic.
+    -   `utils`: Stores core utility functions for the project.
 
--   **`Postgres/migrate_up.py`**: Script to apply database migrations by executing the `init_postgres.sql` file.
+---
 
--   **`Postgres/migrate_down.py`**: Script to reverse database migrations by dropping tables created by `init_postgres.sql`.
+# Coding Style
 
--   **`config.yaml`**: Configuration file containing database connection details for both MongoDB and PostgreSQL.
+-   **File Naming**:
 
--   **`requirements.txt`**: Lists all Python dependencies required for the project, which can be installed using pip.
+    -   File names must use underscores (`_`) between words, e.g., `convert_day.py`, `traffic_count.py`.
 
--   **`Makefile`**: Contains commands to automate common tasks such as running database scripts and installing dependencies.
+-   **Function Naming**:
 
-## Makefile Commands
+    -   Use `camelCase` for function names.
+    -   For local (file-specific) functions, start with a lowercase letter, e.g., `isLeapYear`.
+    -   For external (shared) functions, start with an uppercase letter, e.g., `IsLeapYear`.
 
--   `postgres`: Runs the **`Postgres_connect.py`** script to interact with the PostgreSQL database. Usage: `make postgres`
+-   **Type Annotations**:
+    -   Always define input and output types to guide future users:
+        -   **Do not**:
+            ```python
+            def isLeapYear(year):
+            ```
+        -   **Do**:
+            ```python
+            def isLeapYear(year: int) -> bool:
+            ```
 
--   `postgres_up`: Executes the **`migrate_up.py`** script to apply database migrations. Usage: `make postgres_up`
+---
 
--   `postgres_down`: Executes the **`migrate_down.py`** script to reverse database migrations. Usage: `make postgres_down`
+# How to Contribute
 
--   `mongo`: Runs the **`MongoDB_connect.py`** script to interact with the MongoDB database. Usage: `make mongo`
+To ensure efficient collaboration, follow these steps:
 
--   `install_requirement`: Installs all Python dependencies listed in **`requirements.txt`** using Python 3.11. Usage: `make install_requirement`
+1. **Create a Pull Request**:
+
+    - Spend time writing a detailed description of your changes. This helps reviewers understand your work.
+
+2. **Review Process**:
+    - Do **not** merge your Pull Request if the reviewer has not approved it.
+
+---
+
+# Best Practices
+
+-   Always use a virtual environment for each project to avoid dependency conflicts.
+-   Regularly update your `requirements.txt` file when installing or upgrading packages.
+-   Avoid committing the `venv` directory to version control.
