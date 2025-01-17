@@ -3,6 +3,7 @@
 Please spend time reading these documents first before going deeper:
 
 -   [How to use venv](venv_usage_guide.md)
+-   [How to use database](database.md)
 
 ---
 
