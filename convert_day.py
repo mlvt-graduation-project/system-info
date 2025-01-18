@@ -83,3 +83,24 @@ def GetYearRange(year: int) -> tuple[int, int, str]:
     err = err1 if err1 == err2 else err2 or err1 or f"{err1}; {err2}"
 
     return startOfYear, endOfYear, err
+
+def ConvertTimestampToDay(timestamp: int) -> tuple[int, int, int, str]:
+    """
+    Convert a Unix timestamp (e.g., 1737202346) to day, month, and year (integers).
+    Input: A Unix timestamp (integer).
+    Output: A tuple (day, month, year, error_message).
+            If the timestamp is negative, returns (0, 0, 0, "Invalid input: The timestamp value must not be negative").
+    """
+
+    if(timestamp < 0):
+        return 0, 0, 0, "Invalid input: The timestamp value must not be negative."
+    try:
+        dt = datetime.fromtimestamp(timestamp)
+        day = dt.day
+        month = dt.month
+        year = dt.year
+        err = None
+    except Exception as e:
+        return 0, 0, 0, str(e)
+
+    return day, month, year, err
