@@ -1,5 +1,5 @@
 database:
-    MONGO_URI: 'mongodb+srv://capi:jelly@mlvt-db.9wjqw.mongodb.net/?retryWrites=true&w=majority&appName=mlvt-db'
+    MONGO_URI: 'mongodb://localhost:27017'
     MONGO_DB: 'mlvt'
 
     POSTGRES_HOST: 'localhost'
