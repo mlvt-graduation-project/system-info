@@ -1,5 +1,10 @@
 from pymongo import MongoClient
+import sys
+sys.path.append('/Users/kenz/Documents/Multi-language video/system-info')
+
+from app.database.MongoDB_connect import MongoDBManager
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -18,7 +23,7 @@ class MediaCounter(MongoDBManager):
         """
         return self.db[collectionName].count_documents({})
 
-    def CounTokensByUser(self, collectionName: str, userId: int) -> int:
+    def CountTokensByUser(self, collectionName: str, userId: int) -> int:
         """
         Count the number of tokens associated with a specific user ID.
         Input:
@@ -55,3 +60,33 @@ class MediaCounter(MongoDBManager):
         for description in descriptions:
             counts[description] = self.CountTokensByDescription(collectionName, description)
         return counts
+
+def main():
+    media_counter = MediaCounter()
+    media_counter.connect()
+
+    # Insert some sample data into the 'media' collection
+    documents = [
+        {"UserId": 1, "Description": "Text to text", "Status": "normal", "Timestamp": 170003432, "Reason": None},
+        # {"UserId": 123, "Description": "Voice cloning", "Status": "success", "Timestamp": 170003699, "Reason": None},
+        # {"UserId": 123, "Description": "Text to speech", "Status": "failed", "Timestamp": 170003900, "Reason": "video duration is higher than 15 minutes"},
+        # {"UserId": 123, "Description": "Lipsync", "Status": "failed", "Timestamp": 170003900, "Reason": "video duration is higher than 15 minutes"},
+        # {"UserId": 123, "Description": "Fullpipeline", "Status": "success", "Timestamp": 170003699, "Reason": None},
+    ]
+
+    collection_name = "usage"
+    media_counter.insertMany(collection_name, documents)
+
+    # Execute counting functions
+    print("Total tokens:", media_counter.CountTotalTokens(collection_name))
+    print("Tokens by User 1:", media_counter.CountTokensByUser(collection_name, 1))
+    print("Tokens by description 'Voice cloning':", media_counter.CountTokensByDescription(collection_name, "Voice cloning"))
+    print("Count of all descriptions:", media_counter.CountAllDescriptions(collection_name))
+
+    media_counter.disconnect()
+
+    # Print current working directory
+    # print("Current Working Directory: ", os.getcwd())
+
+if __name__ == "__main__":
+    main()
